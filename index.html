@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -43,6 +43,98 @@
             const index = date.getDate() % quotes.length;
             document.getElementById("quote").textContent = `"${quotes[index].text}"`;
             document.getElementById("author").textContent = `- ${quotes[index].author}`;
+        }
+
+        getDailyQuote();
+    </script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Quote Widget</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            background-color: transparent;
+        }
+        .quote-box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: auto;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input {
+            margin-top: 10px;
+            padding: 5px;
+            width: 80%;
+        }
+    </style>
+</head>
+<body>
+    <div class="quote-box">
+        <h2>Daily Quote</h2>
+        <p id="quote"></p>
+        <small id="author"></small>
+        <br>
+        <button onclick="getRandomQuote()">New Quote</button>
+        <br>
+        <input type="text" id="userQuote" placeholder="Enter your quote">
+        <input type="text" id="userAuthor" placeholder="Author">
+        <button onclick="addUserQuote()">Add Quote</button>
+    </div>
+
+    <script>
+        let quotes = [
+            { text: "The only way to do great work is to love what you do.", author: "Steve Jobs" },
+            { text: "Success is not final, failure is not fatal: it is the courage to continue that counts.", author: "Winston Churchill" },
+            { text: "Believe you can and you're halfway there.", author: "Theodore Roosevelt" },
+            { text: "Do what you can, with what you have, where you are.", author: "Theodore Roosevelt" },
+            { text: "It always seems impossible until it’s done.", author: "Nelson Mandela" },
+            { text: "Act as if what you do makes a difference. It does.", author: "William James" }
+        ];
+
+        function getDailyQuote() {
+            const date = new Date();
+            const index = date.getDate() % quotes.length;
+            displayQuote(quotes[index]);
+        }
+
+        function getRandomQuote() {
+            const index = Math.floor(Math.random() * quotes.length);
+            displayQuote(quotes[index]);
+        }
+
+        function displayQuote(quote) {
+            document.getElementById("quote").textContent = `"${quote.text}"`;
+            document.getElementById("author").textContent = `- ${quote.author}`;
+        }
+
+        function addUserQuote() {
+            const userText = document.getElementById("userQuote").value;
+            const userAuthor = document.getElementById("userAuthor").value || "Anonymous";
+            if (userText.trim() !== "") {
+                quotes.push({ text: userText, author: userAuthor });
+                document.getElementById("userQuote").value = "";
+                document.getElementById("userAuthor").value = "";
+                alert("Quote added!");
+            }
         }
 
         getDailyQuote();
